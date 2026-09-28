@@ -1,0 +1,26 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: auth-service
+  datasource:
+    url: jdbc:postgresql://localhost:5432/banking_db
+    username: root
+    password: rootpassword
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+
+jwt:
+  secret: aVeryLongSecretKeyThatNeedsToBeAtLeast256BitsLongForHS256ToWorkProperly
+  expiration: 86400000
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: prometheus, health

@@ -1,0 +1,28 @@
+server:
+  port: 8084
+
+spring:
+  application:
+    name: fraud-service
+  datasource:
+    url: jdbc:postgresql://localhost:5432/banking_db
+    username: root
+    password: rootpassword
+  jpa:
+    hibernate:
+      ddl-auto: update
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: fraud-group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: "*"
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: prometheus, health
